@@ -44,7 +44,21 @@ const Section1 = () => {
       console.log('got it');
       titleE.current.style.color = 'white';
     }
-    postsTop.map((postTop, i) => (scrollTop + (window.innerHeight * 3) / 4 > postsTop[i] ? (postRefs[i].current.style.opacity = 1) : (postRefs[i].current.style.opacity = 0)));
+    postsTop.map(
+      (postTop, i) => {
+        if (scrollTop + (window.innerHeight * 3) / 4 > postsTop[i] && scrollTop < postsTop[i]) {
+          postRefs[i].current.style.opacity = 1;
+          console.log(scrollTop, (scrollTop / postTop) * 100, i);
+          postRefs[i].current.getElementsByClassName('box')[0].style.width = 200 + (scrollTop / postTop) * 400 + 'px';
+        } else if (scrollTop > postsTop[i]) {
+          postRefs[i].current.getElementsByClassName('box')[0].style.width = 600 + 'px';
+        } else {
+          postRefs[i].current.style.opacity = 0;
+          postRefs[i].current.getElementsByClassName('box')[0].style.width = 200 + 'px';
+        }
+      }
+      // ? ((postRefs[i].current.style.opacity = 1), postRefs[i].current.getElementsByClassName('box')[0].style.width = (200 + (scrollTop * 100/scrollTop)))
+    );
   }, [scrollTop]);
 
   // ref를 통하여 해당 element의 배열값을 받아오는 방법
