@@ -36,19 +36,17 @@ const Section1 = () => {
   };
 
   useEffect(() => {
-    console.log(titleTop);
-    console.log(postsTop);
+    // console.log(titleTop);
+    // console.log(postsTop);
     console.log(scrollTop);
 
     if (scrollTop > titleTop) {
-      console.log('got it');
       titleE.current.style.color = 'white';
     }
     postsTop.map(
       (postTop, i) => {
         if (scrollTop + (window.innerHeight * 3) / 4 > postsTop[i] && scrollTop < postsTop[i]) {
           postRefs[i].current.style.opacity = 1;
-          console.log(scrollTop, (scrollTop / postTop) * 100, i);
           postRefs[i].current.getElementsByClassName('box')[0].style.width = 200 + (scrollTop / postTop) * 400 + 'px';
         } else if (scrollTop > postsTop[i]) {
           postRefs[i].current.getElementsByClassName('box')[0].style.width = 600 + 'px';
@@ -77,13 +75,16 @@ const Section1 = () => {
 
   return (
     <>
-      <div className='contain'>
-        <article className='section-title'>
-          <h2 ref={titleE}>Section1 Interaction</h2>
-        </article>
-        {isLoading ? (
-          <div>Loading...</div>
-        ) : (
+      {isLoading ? (
+        <div className='loading-page'>
+          <img style={{ width: '180px', height: '180px' }} src='/images/ryan-loading.gif' alt='라이언로딩' />
+        </div>
+      ) : (
+        <div className='contain'>
+          <article className='section-title'>
+            <h2 ref={titleE}>Section1 Interaction</h2>
+          </article>
+
           <>
             {postData.map((post, i) => {
               return (
@@ -127,8 +128,8 @@ const Section1 = () => {
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit dignissimos itaque obcaecati eius magni assumenda iusto nihil est quis, doloribus velit accusamus, illum quasi quod porro a facere, nisi numquam!</p>
             </article>
           </>
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 };
