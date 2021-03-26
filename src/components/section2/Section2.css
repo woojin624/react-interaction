@@ -1,0 +1,46 @@
+.chat-contain {
+  padding: 5vw;
+  padding-top: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-balloon {
+  max-width: 60vw;
+  width: fit-content;
+
+  font-size: 1.5rem;
+  padding: 10px 20px;
+  border-radius: 1rem;
+  margin: 0.5rem 0;
+  opacity: 0;
+  transition: 0.3s ease-in;
+}
+.left-balloon {
+  align-self: flex-start;
+  background-color: #363636;
+  color: #fff;
+}
+.right-balloon {
+  align-self: flex-end;
+  background-color: #f7e600;
+  color: #000;
+}
+
+.imoticon {
+  background-color: none;
+  color: #fff;
+  font-size: 2rem;
+  padding: 0;
+}
+
+.imoticon img {
+  width: 300px;
+}
+
+.hide {
+  opacity: 0;
+}
+.show {
+  opacity: 1;
+}

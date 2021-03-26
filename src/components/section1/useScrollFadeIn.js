@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 
-const useScrollFadeIn = (direction = 'left', duration = 1, delay = 0) => {
-  const dom = useRef();
-  console.log(1);
+const useScrollFadeIn = (direction = 'up', duration = 1, delay = 0) => {
+  const element = useRef();
+
   const handleDirection = (name) => {
     switch (name) {
       case 'up':
@@ -18,38 +18,35 @@ const useScrollFadeIn = (direction = 'left', duration = 1, delay = 0) => {
     }
   };
 
-  const handleScroll = useCallback(([entry]) => {
-    const { current } = dom;
-    console.log(1);
-    if (entry.isIntersecting) {
-      current.style.transitionProperty = 'all';
-      current.style.transitionDuration = `${duration}s`;
-      current.style.transitionTimingFunction = 'cubic-bezier(0, 0, 0.2, 1)';
-      current.style.transitionDelay = `${delay}s`;
-      current.style.opacity = 1;
-      current.style.transform = 'translate3d(0, 0, 0)';
-    }
-  }, []);
+  const onScroll = useCallback(
+    ([entry]) => {
+      const { current } = element;
+      if (entry.isIntersecting) {
+        current.style.transitionProperty = 'all';
+        current.style.transitionDuration = `${duration}s`;
+        current.style.transitionTimingFunction = 'cubic-bezier(0, 0, 0.2, 1)';
+        current.style.transitionDelay = `${delay}s`;
+        current.style.opacity = 1;
+        current.style.transform = 'translate3d(0, 0, 0)';
+      }
+    },
+    [delay, duration]
+  );
 
   useEffect(() => {
     let observer;
-    const { current } = dom;
 
-    if (current) {
-      observer = new IntersectionObserver(handleScroll, { threshold: 0.7 });
-      observer.observe(current);
-      console.log(1);
-
-      return () => observer && observer.disconnect();
+    if (element.current) {
+      observer = new IntersectionObserver(onScroll, { threshold: 0.7 });
+      observer.observe(element.current);
     }
-  }, [handleScroll]);
+
+    return () => observer && observer.disconnect();
+  }, [onScroll]);
 
   return {
-    ref: dom,
-    style: {
-      opacity: 0.5,
-      transform: handleDirection(direction),
-    },
+    ref: element,
+    style: { opacity: 0, transform: handleDirection(direction) },
   };
 };
 
