@@ -33,7 +33,7 @@ const Section1 = () => {
 
   useEffect(() => {
     // console.log(postsTop);
-    console.log(scrollTop);
+    // console.log(scrollTop);
 
     if (scrollTop > titleTop) {
       titleE.current.style.color = 'white';
@@ -86,12 +86,12 @@ const Section1 = () => {
           })}
           {alpaArr.map((alpa, i) => {
             return (
-              <>
+              <section key={i}>
                 <div className={`${alpa} box`}></div>
                 <article className='p-article'>
                   <p>{postData[i].body}</p>
                 </article>
-              </>
+              </section>
             );
           })}
         </div>

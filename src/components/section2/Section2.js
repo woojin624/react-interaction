@@ -8,7 +8,7 @@ const Section2 = () => {
   const [chatData, setChatData] = useState([]);
   useEffect(async function fetchData() {
     const postResponse = await fetch(`https://jsonplaceholder.typicode.com/posts`).then((response) => response.json());
-    postResponse.length = 40;
+    postResponse.length = 60;
     setChatData(postResponse);
     setIsLoading(false);
 
@@ -30,7 +30,7 @@ const Section2 = () => {
   useEffect(() => {
     let arr = [...chatReveal];
     chatsTop.map((top, i) => {
-      if (window.scrollY + (window.innerHeight * 3) / 4 > top && window.scrollY + window.innerHeight / 4 < top) {
+      if (window.scrollY + (window.innerHeight * 4) / 5 > top && window.scrollY + window.innerHeight / 5 < top) {
         arr[i] = 'show';
       } else {
         arr[i] = 'hide';
@@ -63,11 +63,11 @@ const Section2 = () => {
               </div>
             );
           })}
-          <div className='chat-balloon left-balloon'>안녕하세요</div>
-          <div className='chat-balloon left-balloon'>누구세요?</div>
-          <div className='chat-balloon right-balloon'>갈퀴가 없어 슬픈 숫사자 라이언입니다!</div>
-          <div className='chat-balloon right-balloon imoticon'>
-            <img src='/images/ryan-1.gif' alt='' />
+          <div className='chat-balloon left-balloon show'>안녕하세요</div>
+          <div className='chat-balloon left-balloon show'>누구세요?</div>
+          <div className='chat-balloon right-balloon show'>갈퀴가 없어 슬픈 숫사자 라이언입니다!</div>
+          <div className='chat-balloon right-balloon imoticon show'>
+            <img src='http://newtype1f.synology.me/images/ryan-1.gif' alt='' />
           </div>
         </div>
       )}
