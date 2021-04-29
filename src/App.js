@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Section1 from './components/section1/Section1';
 import Section2 from './components/section2/Section2';
 import Section3 from './components/section3/Section3';
+import Section4 from './components/section4/Section4';
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
             <Nav.Link as={Link} to='/section3'>
               Section3
             </Nav.Link>
+            <Nav.Link as={Link} to='/section4'>
+              Section4
+            </Nav.Link>
           </Nav>
         </Navbar>
         <div>
@@ -39,6 +43,11 @@ function App() {
             </Route>
             <Route path='/section3'>
               <Section3 />
+            </Route>
+            <Route path='/section4'>
+              <Router>
+                <Section4 />
+              </Router>
             </Route>
           </Switch>
         </div>
